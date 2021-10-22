@@ -1,116 +1,170 @@
 .wrapper {
-    background-color: var(--gray);
-    width: 100%;
-    height: 100vh;
+  background-color: var(--gray);
+  width: 100%;
+  height: 100vh;
 }
 .header {
-    display: flex;
-    background-color: var(--black2);
-    width: auto;
-    border-radius: 15px;
+  display: flex;
+  background-color: var(--black2);
+  width: auto;
+  border-radius: 15px;
 }
 .header-left {
-    display: flex;
-    padding: 20px;
-    flex: 1;
-    align-items: center;
+  display: flex;
+  padding: 20px;
+  flex: 1;
+  align-items: center;
 }
 .header-right {
-    display: flex;
-    padding: 16px;
+  display: flex;
+  padding: 16px;
 }
 .header-right .header-item {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .header-right .btn:hover {
-    background-color: var(--gray);
+  background-color: var(--gray);
 }
 .header-right .header-item span {
-    color: var(--white);
-    font-size: 0.9rem;
-    text-transform: uppercase;
+  color: var(--white);
+  font-size: 0.9rem;
+  text-transform: uppercase;
 }
 .header-right .header-item ion-icon {
-    color: var(--white);
-    font-size: 1.3rem;
-    padding: 0 4px;
+  color: var(--white);
+  font-size: 1.3rem;
+  padding: 0 4px;
 }
 .header-right .header-item ion-icon:hover {
-    color: var(--blue2);
+  color: var(--blue2);
 }
 .content {
-    
 }
 .content .card {
-    border: 1px solid #000;
-    border-radius: 15px;
-    background-color: var(--gray);
-    padding: 10px;
+  border: 1px solid #000;
+  border-radius: 15px;
+  background-color: var(--gray);
+  padding: 10px;
 }
 .content .card .card-img {
-    width: 100%;
-    height: 6rem;
+  width: 100%;
+  height: 6rem;
 }
 .card-body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .card-body .card-title a {
-    text-decoration: none;
-    color: var(--white);
-    font-size: 1.5rem;
+  text-decoration: none;
+  color: var(--white);
+  font-size: 1.5rem;
 }
 .card-body .card-title a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 .card-body p {
-    color: var(--white);
+  color: var(--white);
 }
 .card-body .card-actions {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 .card-body .card-actions .btn {
-    text-transform: uppercase;
-    padding: 10px;
-    margin-left: 6px;
+  text-transform: uppercase;
+  padding: 10px;
+  margin-left: 6px;
 }
 
 .title {
-    color: var(--white);
+  color: var(--white);
 }
 .payment {
-    padding: 20px;
+  padding: 20px;
 }
 .payment-title {
-    color: var(--white);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
 }
 .payment-action {
-    padding: 20px 0;
-    display: flex;
-    align-items: center;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .payment-action label {
-    color: var(--white);
-    font-size: 1.4em;
-    width: 20%;
+  color: var(--white);
+  font-size: 1.4em;
 }
-.payment-action input {
-    width: 80%;
+.payment-action .totalBox {
+  color: var(--white);
+  font-size: 1.4em;
+  font-weight: bold;
+  display: flex;
+  justify-self: right;
+  align-items: center;
 }
 .payment-btns {
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .payment-btns .btn {
-    width: 150px;
+  width: 150px;
 }
 .payment-title {
-    
+}
+.line {
+  margin: 0 -30px;
+  border: 1px solid var(--black2);
+}
+.back-home p {
+  color: var(--white);
+  padding-top: 20px;
+}
+.btn-back {
+  width: 100%;
+  text-align: center;
+  border-radius: 20px !important;
+}
+.btn-token {
+  width: 48%;
+  display: flex;
+  color: var(--white);
+  padding: 8px 10px;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--black2);
+  border-radius: 20px;
+}
+.btn-token:hover {
+  cursor: pointer;
+  background-color: var(--gray60);
+}
+.btn-token > div {
+  display: flex;
+  align-items: center;
+  line-height: normal;
+}
+.icon-btn {
+  padding-right: 4px;
+  width: 25px;
+}
+.footer {
+  color: var(--white);
+  width: auto;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.6em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.footer a {
+  text-decoration: none;
 }

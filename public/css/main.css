@@ -1,19 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 :root {
-    --gray: rgb(61, 68, 81);
-    --purple: rgb(138, 112, 148);
-    --white: rgb(255, 255, 255);
-    --black1: rgb(24, 23, 23);
-    --blue1: rgb(87, 13, 248);
-    --blue2: rgb(72, 69, 236);
-    --pink: rgb(190, 55, 161);
-    --black2: rgb(42, 46, 55);
-    --header-height: 60px;
+  --gray: rgb(61, 68, 81);
+  --purple: rgb(138, 112, 148);
+  --white: rgb(255, 255, 255);
+  --black1: rgb(24, 23, 23);
+  --blue1: rgb(87, 13, 248);
+  --blue2: rgb(72, 69, 236);
+  --pink: rgb(190, 55, 161);
+  --black2: rgb(42, 46, 55);
+  --gray60: rgb(91, 97, 110);
+  --header-height: 60px;
 }
