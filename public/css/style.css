@@ -1,0 +1,116 @@
+.wrapper {
+    background-color: var(--gray);
+    width: 100%;
+    height: 100vh;
+}
+.header {
+    display: flex;
+    background-color: var(--black2);
+    width: auto;
+    border-radius: 15px;
+}
+.header-left {
+    display: flex;
+    padding: 20px;
+    flex: 1;
+    align-items: center;
+}
+.header-right {
+    display: flex;
+    padding: 16px;
+}
+.header-right .header-item {
+    display: flex;
+    align-items: center;
+}
+.header-right .btn:hover {
+    background-color: var(--gray);
+}
+.header-right .header-item span {
+    color: var(--white);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+.header-right .header-item ion-icon {
+    color: var(--white);
+    font-size: 1.3rem;
+    padding: 0 4px;
+}
+.header-right .header-item ion-icon:hover {
+    color: var(--blue2);
+}
+.content {
+    
+}
+.content .card {
+    border: 1px solid #000;
+    border-radius: 15px;
+    background-color: var(--gray);
+    padding: 10px;
+}
+.content .card .card-img {
+    width: 100%;
+    height: 6rem;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+.card-body .card-title a {
+    text-decoration: none;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+.card-body .card-title a:hover {
+    text-decoration: underline;
+}
+.card-body p {
+    color: var(--white);
+}
+.card-body .card-actions {
+    display: flex;
+    justify-content: end;
+}
+.card-body .card-actions .btn {
+    text-transform: uppercase;
+    padding: 10px;
+    margin-left: 6px;
+}
+
+.title {
+    color: var(--white);
+}
+.payment {
+    padding: 20px;
+}
+.payment-title {
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.payment-action {
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+}
+.payment-action label {
+    color: var(--white);
+    font-size: 1.4em;
+    width: 20%;
+}
+.payment-action input {
+    width: 80%;
+}
+.payment-btns {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.payment-btns .btn {
+    width: 150px;
+}
+.payment-title {
+    
+}

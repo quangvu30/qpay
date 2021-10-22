@@ -1,0 +1,75 @@
+<div class="metamask content row g-0 pt-3">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+        <div class="card m-2">
+            <div>
+                <img class="card-img" src="/img/mm-logo.svg" alt="">
+            </div>
+            <div class="card-body">
+                <h2 class="card-title">
+                    <a class="link" href="https://metamask.io/" target="_blank" rel="noreferrer">MetaMask</a>
+                </h2>
+                <p>A crypto wallet & gateway to blockchain apps</p>
+                <div class="card-actions">
+                    <div class="btns-connect-metamask">
+                        <button id="connect-to-metamask" type="button" class="btn btn-primary btn-connect-metamask">Connect with metamask</button>
+                    </div>
+                    <div class="btns-connected-metamask d-none">
+                        <button type="button" class="btn btn-secondary disabled bg-secondary bg-gradient">
+                            <div class="">
+                                <span role="img" aria-label="check">✅</span>
+                                Connect with MetaMask
+                            </div>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sign-message">Sign message</button>
+                        <button type="button" class="btn btn-primary btn-deactivate">Deactivate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+        <div class="card m-2">
+            <div>
+                <img class="card-img" src="/img/walletconnect-logo.svg" alt="">
+            </div>
+            <div class="card-body">
+                <h2 class="card-title">
+                    <a class="link" href="https://walletconnect.org/" target="_blank" rel="noreferrer">Other</a>
+                </h2>
+                <p>Open protocol for connecting Other</p>
+                <div class="card-actions">
+                    <button type="button" class="btn btn-primary btn-connect-other">Connect with Other</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="deposit content row g-0 pt-3 d-none">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+    <h1 class="title">Payment Gateways</h1>
+     <button type="button" class="btn btn-primary btn-back">Back</button>
+  </div>
+  <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+    <div class="card m-2">
+      <div class="payment">
+        <div class="payment-title">
+            <h2>Payment method</h2>
+            <div class="time">
+                <span class="minus"></span>
+                <span> : </span>
+                <span class="second"></span>
+            </div>
+        </div>
+        <div class="payment-action">
+            <label for="inputValue" class="col-form-label">Value</label>
+            <input type="text" id="inputValue" class="form-control" aria-describedby="value"/>
+        </div>
+        <div class="payment-btns">
+            <button id="sendUSDTButton" type="button" class="btn btn-primary btn-BUSD">BUSD</button>
+            <button id="sendUSDTButton" type="button" class="btn btn-primary btn-USDT">USDT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
