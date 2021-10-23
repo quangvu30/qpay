@@ -1,0 +1,41 @@
+{
+    "1": {
+        "chainName": "ether",
+        "token": {
+            "USDT": {
+                "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+            }
+        }
+        
+    },
+    "3": {
+        "chainName": "ropsten"
+    },
+    "4": {
+        "chainName": "rinkeby",
+        "token": {
+            "USDTtest": {
+                "address": ""
+            }
+        }
+    },
+    "5": {
+        "chainName": "goerli"
+    },
+    "56": {
+        "chainName": "bsc",
+        "token": {
+            "BUSD": {
+                "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"
+            }
+        }
+    },
+    "97": {
+        "chainName": "bsc_test",
+        "token": {
+            "BUSDtest": {
+                "address": "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee"
+            }
+        }
+    }
+}

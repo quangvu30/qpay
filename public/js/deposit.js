@@ -1,4 +1,6 @@
-
+function validateData(transactionData) {
+  const { blockNumber, transactionHash, to } = transactionData;
+}
 function countDownTime() {
   const payment = _$(".payment");
   const minus = _$(".minus");

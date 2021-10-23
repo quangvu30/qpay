@@ -9,21 +9,38 @@ window.addEventListener("load", async () => {
 });
 
 $("#connect-to-metamask").click(async function () {
-  console.log("connect to meta mask");
   //Will Start the metamask extension
   ethereum.request({
     method: "eth_requestAccounts",
   });
 
-  console.log(window.ethereum.networkVersion);
-  _$("#network").innerHTML = window.ethereum.networkVersion;
   const account = await getAccount();
   const newAccount = handleLengthAccount(account);
+  _$("#network").innerHTML = window.ethereum.networkVersion;
   _$("#address").innerHTML = newAccount;
 });
 
-$("#sendUSDTButton").click(async function () {
-  $.getJSON("./contracts/BUSDTest.json", function (data) {
+$("#sendUSDTButton").click(function () {
+  $.getJSON("./contracts/USDT.json", function (data) {
+    sendToken(data);
+  });
+});
+
+$("#sendBUSDButton").click(function () {
+  $.getJSON("./contracts/BUSD.json", function (data) {
+    sendToken(data);
+  });
+});
+
+// Button test send token
+$("#sendUSDTtestButton").click(function () {
+  $.getJSON("./contracts/USDTtest.json", function (data) {
+    sendToken(data);
+  });
+});
+
+$("#sendBUSDtestButton").click(function () {
+  $.getJSON("./contracts/BUSDtest.json", function (data) {
     sendToken(data);
   });
 });
@@ -45,27 +62,30 @@ async function getAccount() {
   return accounts[0];
 }
 
-async function sendToken(contractABI, receiver) {
-  if (+window.ethereum.networkVersion !== 97) {
-    alert("You must change network to BSC-TEST");
+function sendToken(chainId, contractABI, contractAddress, receiverAddress) {
+  if (+window.ethereum.networkVersion !== chainId) {
+    alert("You must change network to chainId " + chainId);
     return;
   }
-  var contractAddress = "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee";
-  var receiver = "0x07EbCac872A867FA5B9f9593BD0564e6c541EEd7";
-  var currentUser = ethereum.selectedAddress;
-  console.log(currentUser);
-  var amount = Web3.utils.toHex(
+
+  let currentUser = ethereum.selectedAddress;
+  let amount = Web3.utils.toHex(
     Web3.utils.toWei(_$("#totalValue").innerText, "ether")
   );
 
-  var contractInstance = new web3.eth.Contract(contractABI, contractAddress);
+  let contractInstance = new web3.eth.Contract(contractABI, contractAddress);
 
   contractInstance.methods
-    .transfer(receiver, amount)
+    .transfer(receiverAddress, amount)
     .send({
       from: currentUser,
     })
-    .then(console.log);
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log({ error });
+    });
 }
 
 function handleLengthAccount(account) {
