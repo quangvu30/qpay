@@ -1,4 +1,10 @@
 const _$ = document.querySelector.bind(document);
+const btnsConnectMetamask = _$(".btns-connect-metamask");
+const btnsConnectedMetamask = _$(".btns-connected-metamask");
+const dot = _$(".dot");
+const network = _$("#network");
+const address = _$("#address");
+var qrcode = new QRCode("qrcode");
 
 window.addEventListener("load", async () => {
   if (!isMetamaskInstalled()) {
@@ -13,20 +19,35 @@ $("#connect-to-metamask").click(async function () {
   ethereum.request({
     method: "eth_requestAccounts",
   });
-
   const account = await getAccount();
-  const newAccount = handleLengthAccount(account);
-  _$("#network").innerHTML = window.ethereum.networkVersion;
-  _$("#address").innerHTML = newAccount;
+  if (account) {
+    btnsConnectMetamask.classList.add("d-none");
+    btnsConnectedMetamask.classList.remove("d-none");
+    dot.innerHTML = "🟢";
+    const newAccount = handleLengthAccount(account);
+    network.innerHTML = window.ethereum.networkVersion;
+    address.innerHTML = newAccount;
+  }
+});
+
+//handle click btn deactivate
+$("#deactivate").click(function () {
+  btnsConnectMetamask.classList.remove("d-none");
+  btnsConnectedMetamask.classList.add("d-none");
+  dot.innerHTML = "🟠";
+  network.innerHTML = "";
+  address.innerHTML = "";
 });
 
 $("#sendUSDTButton").click(function () {
+  makeCode(this);
   $.getJSON("./contracts/USDT.json", function (data) {
     sendToken(data);
   });
 });
 
 $("#sendBUSDButton").click(function () {
+  makeCode(this);
   $.getJSON("./contracts/BUSD.json", function (data) {
     sendToken(data);
   });
@@ -93,4 +114,14 @@ function handleLengthAccount(account) {
   const lastAcc = account.slice(account.length - 3, account.length);
   const newAccount = firstAcc + "..." + lastAcc;
   return newAccount;
+}
+
+function makeCode(btn) {
+  let btnValue = btn.getAttribute("value");
+  if (!btnValue) {
+    alert("QR has not value");
+    return;
+  }
+
+  qrcode.makeCode(btnValue);
 }

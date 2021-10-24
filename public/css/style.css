@@ -168,3 +168,9 @@
 .footer a {
   text-decoration: none;
 }
+.qrcode-box {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

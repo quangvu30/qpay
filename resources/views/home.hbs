@@ -26,6 +26,7 @@
             <button type="button" class="btn btn-primary btn-sign-message">Sign
               message</button>
             <button
+              id="deactivate"
               type="button"
               class="btn btn-primary btn-deactivate"
             >Deactivate</button>
@@ -62,7 +63,13 @@
 
 <div class="deposit content row g-0 pt-3 d-none">
   <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-    <h1 class="title">Payment Gateways</h1>
+    <div class="title">
+      <h1>Payment Gateways</h1>
+      <span>{{nameProvider}}</span>
+    </div>
+    <div class="qrcode-box">
+      <div id="qrcode"></div>
+    </div>
   </div>
   <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
     <div class="card m-2">
@@ -80,20 +87,28 @@
           <label for="inputValue" class="col-form-label">Total</label>
           <div class="totalBox">
             <span>$ </span>
-            <span id="totalValue" class="totalValue">10</span>
+            <span id="totalValue" class="totalValue">{{totalValue}}</span>
           </div>
         </div>
         <div class="text-white">Select a cryptocurrency to pay with another
           wallet</div>
         <div class="payment-btns">
-          <div id="sendBUSDButton" class="btn-token btn-BUSD">
+          <div
+            id="sendBUSDButton"
+            class="btn-token btn-BUSD"
+            value="{{wallet.BUSD}}"
+          >
             <div>
               <img class="icon-btn" src="/img/iconBUSD.png" />
               BUSD
             </div>
             <div>BEP20</div>
           </div>
-          <div id="sendUSDTButton" class="btn-token btn-USDT">
+          <div
+            id="sendUSDTButton"
+            class="btn-token btn-USDT"
+            value="{{wallet.USDT}}"
+          >
             <div>
               <img class="icon-btn" src="/img/iconUSDT.png" />
               USDT
