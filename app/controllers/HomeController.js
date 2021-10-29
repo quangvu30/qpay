@@ -1,7 +1,18 @@
+// const { getTicket } = require("../../util/handleAPI");
+
 class HomeController {
   //[GET] home
-  index(req, res) {
+  async index(req, res) {
     const { idTicket } = req.params;
+    // const response = await getTicket(idTicket);
+
+    // if (response.status === "error") {
+    //   return res.status(500).json("error");
+    // }
+
+    // console.log(response);
+    // return;
+
     res.render("home", {
       nameProvider: "quang",
       totalValue: 20,

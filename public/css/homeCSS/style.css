@@ -75,9 +75,11 @@
   padding: 10px;
   margin-left: 6px;
 }
-
 .title {
   color: var(--white);
+}
+.title > span {
+  font-size: 2rem;
 }
 .payment {
   padding: 20px;
@@ -170,7 +172,4 @@
 }
 .qrcode-box {
   padding: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
