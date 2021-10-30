@@ -1,25 +1,30 @@
-// const { getTicket } = require("../../util/handleAPI");
-
+const axios = require("../../utils/axiosHelper");
 class HomeController {
-  //[GET] home
+  //[GET] gateway
   async index(req, res) {
     const { idTicket } = req.params;
-    // const response = await getTicket(idTicket);
+    const ticketInfo = await axios.getTicket(idTicket);
+    if (ticketInfo.status === "error") {
+      return res.json({
+        status: "error",
+        error: "error",
+      });
+    }
 
-    // if (response.status === "error") {
-    //   return res.status(500).json("error");
-    // }
-
-    // console.log(response);
-    // return;
-
+    let wallet = {};
+    Object.keys(ticketInfo.data.wallet).forEach((chainId) => {
+      Object.keys(ticketInfo.data.wallet[chainId]).forEach((coin) => {
+        if (ticketInfo.data.wallet[chainId][coin].active) {
+          wallet[`${coin}_${chainId}`] =
+            ticketInfo.data.wallet[chainId][coin].address;
+        }
+      });
+    });
     res.render("home", {
-      nameProvider: "quang",
-      totalValue: 20,
-      wallet: {
-        BUSD: "test",
-        USDT: "https://www.youtube.com/",
-      },
+      nameProvider: ticketInfo.data.businessName,
+      totalValue: ticketInfo.data.value,
+      wallet,
+      timeExpired: ticketInfo.data.timeExpired,
     });
   }
 }
