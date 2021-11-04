@@ -41,28 +41,48 @@ $("#deactivate").click(function () {
 
 $("#sendUSDTButton").click(function () {
   makeCode(this);
-  $.getJSON("./contracts/USDT.json", function (data) {
-    sendToken(data);
+  $.getJSON("../contracts/USDT.json", function (data) {
+    sendToken(
+      1,
+      data,
+      "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      _$("#sendUSDTButton").getAttribute("value")
+    );
   });
 });
 
 $("#sendBUSDButton").click(function () {
   makeCode(this);
-  $.getJSON("./contracts/BUSD.json", function (data) {
-    sendToken(data);
+  $.getJSON("../contracts/BUSD.json", function (data) {
+    sendToken(
+      56,
+      data,
+      "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+      _$("#sendBUSDButton").getAttribute("value")
+    );
   });
 });
 
 // Button test send token
 $("#sendUSDTtestButton").click(function () {
-  $.getJSON("./contracts/USDTtest.json", function (data) {
-    sendToken(data);
+  $.getJSON("../contracts/USDTtest.json", function (data) {
+    sendToken(
+      4,
+      data,
+      "0x8A3abB37Faf98b01e61DC30FBC1c62e0c9Fa70dd",
+      _$("#sendUSDTtestButton").getAttribute("value")
+    );
   });
 });
 
 $("#sendBUSDtestButton").click(function () {
-  $.getJSON("./contracts/BUSDtest.json", function (data) {
-    sendToken(data);
+  $.getJSON("../contracts/BUSDtest.json", function (data) {
+    sendToken(
+      97,
+      data,
+      "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee",
+      _$("#sendBUSDtestButton").getAttribute("value")
+    );
   });
 });
 

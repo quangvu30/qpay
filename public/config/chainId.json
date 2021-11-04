@@ -15,7 +15,7 @@
         "chainName": "rinkeby",
         "token": {
             "USDTtest": {
-                "address": ""
+                "address": "0x8A3abB37Faf98b01e61DC30FBC1c62e0c9Fa70dd"
             }
         }
     },

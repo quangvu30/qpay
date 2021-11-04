@@ -3,7 +3,7 @@ const axios = require("axios");
 async function getTicket(ticket_id) {
   let config = {
     method: "get",
-    url: "http://54.255.155.203:3001/ticket/getTicket",
+    url: "https://yowa.tech/api/ticket/getTicket",
     data: {
       ticket_id,
     },
@@ -20,7 +20,7 @@ async function getTicket(ticket_id) {
 async function validTransaction(transactionData) {
   let config = {
     method: "post",
-    url: "http://54.255.155.203:3001/ticket/validTicket",
+    url: "https://yowa.tech/api/ticket/validTicket",
     data: {
       ticket_id: "",
       blockNumber: "9553574",
