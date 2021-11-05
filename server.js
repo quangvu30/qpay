@@ -11,8 +11,8 @@ const route = require("./routes/index");
 const app = express();
 const port = process.env.PORT || 3030;
 
-// app.use(cors());
-//app.use(helmet());
+app.use(cors());
+app.use(helmet());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded());
 app.use(express.json());
