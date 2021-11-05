@@ -3634,3 +3634,65 @@ body.is-preload #header:after {
     padding: 2em 1em 2em 1em;
   }
 }
+
+/* css update */
+
+.plan-box {
+  border-left: 8px solid rgb(226 226 226 / 50%);
+  padding: 30px 30px !important;
+  box-shadow: 0 0 15px #eee;
+  margin-top: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-content .plan-title {
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  color: #f6a51c;
+  margin: 24px 0px;
+}
+
+.plan-content .plan-tag {
+  background-color: rgb(238 238 238 / 30%);
+  padding: 15px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #eee;
+  height: 100px;
+}
+.plan-tag span {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+}
+.plan-tag p {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+.plan-content ul {
+  margin: 28px 0;
+}
+.plan-content ul > li {
+  color: #666;
+  padding-bottom: 12px;
+  position: relative;
+  padding-left: 26px;
+  list-style: none;
+  text-align: left;
+}
+.plan-content ul li::before {
+  content: "\f00c";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 16px;
+  color: #888;
+  position: absolute;
+  top: -1 px;
+  left: 0;
+}
