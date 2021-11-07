@@ -16,4 +16,4 @@ jobs:
         with:
           node-version: "14"
       - run: npm i
-      - run: pm2 start server.js --name=Client
+      - run: pm2 restart Client

@@ -1,11 +1,8 @@
-const homeRouter = require("./home");
-const landingRouter = require("./landing");
-const errorRouter = require("./error");
-
 function route(app) {
-  app.use("/gate", homeRouter);
-  app.use("/", landingRouter);
-  app.use("/error", errorRouter);
+  app.use("/gate", require("./home"));
+  app.use("/", require("./landing"));
+  app.use("/error", require("./error"));
+  app.use("/document", require("./document"));
 }
 
 module.exports = route;
