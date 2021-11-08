@@ -44,6 +44,7 @@ $("#sendUSDTButton").click(function () {
   $.getJSON("../contracts/USDT.json", function (data) {
     sendToken(
       1,
+      "usdt",
       data,
       "0xdAC17F958D2ee523a2206206994597C13D831ec7",
       _$("#sendUSDTButton").getAttribute("value")
@@ -56,6 +57,7 @@ $("#sendBUSDButton").click(function () {
   $.getJSON("../contracts/BUSD.json", function (data) {
     sendToken(
       56,
+      "busd",
       data,
       "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
       _$("#sendBUSDButton").getAttribute("value")
@@ -65,9 +67,11 @@ $("#sendBUSDButton").click(function () {
 
 // Button test send token
 $("#sendUSDTtestButton").click(function () {
+  makeCode(this);
   $.getJSON("../contracts/USDTtest.json", function (data) {
     sendToken(
       4,
+      "usdttest",
       data,
       "0x8A3abB37Faf98b01e61DC30FBC1c62e0c9Fa70dd",
       _$("#sendUSDTtestButton").getAttribute("value")
@@ -76,9 +80,11 @@ $("#sendUSDTtestButton").click(function () {
 });
 
 $("#sendBUSDtestButton").click(function () {
+  makeCode(this);
   $.getJSON("../contracts/BUSDtest.json", function (data) {
     sendToken(
       97,
+      "busdtest",
       data,
       "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee",
       _$("#sendBUSDtestButton").getAttribute("value")
@@ -103,7 +109,13 @@ async function getAccount() {
   return accounts[0];
 }
 
-function sendToken(chainId, contractABI, contractAddress, receiverAddress) {
+function sendToken(
+  chainId,
+  typeToken,
+  contractABI,
+  contractAddress,
+  receiverAddress
+) {
   if (+window.ethereum.networkVersion !== chainId) {
     alert("You must change network to chainId " + chainId);
     return;
@@ -122,11 +134,34 @@ function sendToken(chainId, contractABI, contractAddress, receiverAddress) {
       from: currentUser,
     })
     .then((result) => {
-      console.log(result);
+      let transactionData = {};
+      transactionData.blockNumber = result.blockNumber;
+      transactionData.txn = result.transactionHash;
+      transactionData.to = result.events.Transfer.returnValues.to;
+      transactionData.value = web3.utils.fromWei(
+        result.events.Transfer.returnValues.value
+      );
+      transactionData.chainId = chainId;
+      transactionData.typeToken = typeToken;
+      console.log(transactionData);
+      postData(window.location.href, transactionData)
+        .then(console.log)
+        .catch(console.log);
     })
     .catch((error) => {
       console.log({ error });
     });
+}
+
+async function postData(url, data) {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.json();
 }
 
 function handleLengthAccount(account) {
@@ -144,4 +179,8 @@ function makeCode(btn) {
   }
 
   qrcode.makeCode(btnValue);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

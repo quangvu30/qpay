@@ -17,19 +17,18 @@ async function getTicket(ticket_id) {
   }
 }
 
-async function validTransaction(transactionData) {
+async function validTransaction(id, transactionData) {
   let config = {
     method: "post",
     url: "https://yowa.tech/api/ticket/validTicket",
     data: {
-      ticket_id: "",
-      blockNumber: "9553574",
-      transactionHash:
-        "0xaf0f0ed596c7848e429f67bcc145e95221f40d165327657ccfa02acd10f4974b",
-      to: "0x09453c14D12603B4dD237991e8FDf52251EA0529",
-      value: "10",
-      chainId: 4,
-      typeToken: "busd",
+      ticket_id: id,
+      blockNumber: transactionData.blockNumber,
+      transactionHash: transactionData.txn,
+      to: transactionData.to,
+      value: transactionData.value,
+      chainId: transactionData.chainId,
+      typeToken: transactionData.typeToken,
     },
   };
 
@@ -40,4 +39,4 @@ async function validTransaction(transactionData) {
     return err;
   }
 }
-module.exports = { getTicket };
+module.exports = { getTicket, validTransaction };

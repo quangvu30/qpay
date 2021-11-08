@@ -13,19 +13,26 @@ class HomeController {
 
     let wallet = {};
     Object.keys(ticketInfo.data.wallet).forEach((chainId) => {
-      Object.keys(ticketInfo.data.wallet[chainId]).forEach((coin) => {
-        if (ticketInfo.data.wallet[chainId][coin].active) {
-          wallet[`${coin}_${chainId}`] =
-            ticketInfo.data.wallet[chainId][coin].address;
-        }
-      });
+      if (ticketInfo.data.wallet[chainId].active) {
+        wallet[`C${chainId}`] = ticketInfo.data.wallet[chainId].address;
+      } else {
+        wallet[`C${chainId}`] = "";
+      }
     });
     res.render("home", {
       nameProvider: ticketInfo.data.businessName,
       totalValue: ticketInfo.data.value,
-      wallet,
+      wallet: wallet,
       timeExpired: ticketInfo.data.timeExpired,
     });
+  }
+
+  // [POST]  validate transaction
+  async validateTxn(req, res) {
+    const { idTicket } = req.params;
+    console.log(req.body);
+    const dataValid = await axios.validTransaction(idTicket, req.body);
+    res.json(dataValid);
   }
 }
 
