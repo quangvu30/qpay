@@ -44,7 +44,7 @@ $("#sendUSDTButton").click(function () {
   $.getJSON("../contracts/USDT.json", function (data) {
     sendToken(
       1,
-      "usdt",
+      "tether",
       data,
       "0xdAC17F958D2ee523a2206206994597C13D831ec7",
       _$("#sendUSDTButton").getAttribute("value")
@@ -57,7 +57,7 @@ $("#sendBUSDButton").click(function () {
   $.getJSON("../contracts/BUSD.json", function (data) {
     sendToken(
       56,
-      "busd",
+      "binance-usd",
       data,
       "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
       _$("#sendBUSDButton").getAttribute("value")
