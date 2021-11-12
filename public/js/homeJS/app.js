@@ -40,7 +40,9 @@ $("#deactivate").click(function () {
 });
 
 $("#sendUSDTButton").click(function () {
-  makeCode(this);
+  if (!makeCode(this)) {
+    return;
+  }
   $.getJSON("../contracts/USDT.json", function (data) {
     sendToken(
       1,
@@ -53,7 +55,9 @@ $("#sendUSDTButton").click(function () {
 });
 
 $("#sendBUSDButton").click(function () {
-  makeCode(this);
+  if (!makeCode(this)) {
+    return;
+  }
   $.getJSON("../contracts/BUSD.json", function (data) {
     sendToken(
       56,
@@ -67,7 +71,9 @@ $("#sendBUSDButton").click(function () {
 
 // Button test send token
 $("#sendUSDTtestButton").click(function () {
-  makeCode(this);
+  if (!makeCode(this)) {
+    return;
+  }
   $.getJSON("../contracts/USDTtest.json", function (data) {
     sendToken(
       4,
@@ -80,7 +86,9 @@ $("#sendUSDTtestButton").click(function () {
 });
 
 $("#sendBUSDtestButton").click(function () {
-  makeCode(this);
+  if (!makeCode(this)) {
+    return;
+  }
   $.getJSON("../contracts/BUSDtest.json", function (data) {
     sendToken(
       97,
@@ -172,13 +180,20 @@ function handleLengthAccount(account) {
 }
 
 function makeCode(btn) {
-  let btnValue = btn.getAttribute("value");
-  if (!btnValue) {
-    alert("QR has not value");
-    return;
+  let addressValue = btn.getAttribute("value");
+  let rateValue = btn.getAttribute("data-rate");
+  let unit = btn.children[0].innerText;
+
+  if (addressValue === "null") {
+    btn.style = "opacity: 0.9; cursor: no-drop;";
+    return false;
   }
 
-  qrcode.makeCode(btnValue);
+  _$("#wallet-address").innerText = `Address: ${addressValue}`;
+  _$("#rate").innerText = `Amount: ${rateValue} ${unit}`;
+
+  qrcode.makeCode(addressValue);
+  return true;
 }
 
 function sleep(ms) {

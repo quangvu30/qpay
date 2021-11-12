@@ -7,9 +7,10 @@ function countDownTime() {
   const minus = _$(".minus");
   const second = _$(".second");
   const time = _$(".time");
-
+  const timeExpired = Number(time.getAttribute("data"));
+  console.log(timeExpired);
   // Set the date = date now + 15 minus
-  var countDownDate = new Date(Date.now() + 900000);
+  var countDownDate = new Date(Date.now() + timeExpired * 60 * 1000);
 
   // Update the count down every 1 second
   var x = setInterval(function () {
@@ -38,4 +39,5 @@ function countDownTime() {
     }
   }, 1000);
 }
+
 countDownTime();

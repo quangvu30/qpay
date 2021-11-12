@@ -16,13 +16,14 @@ class HomeController {
       if (ticketInfo.data.wallet[chainId].active) {
         wallet[`C${chainId}`] = ticketInfo.data.wallet[chainId].address;
       } else {
-        wallet[`C${chainId}`] = "";
+        wallet[`C${chainId}`] = "null";
       }
     });
     res.render("home", {
       nameProvider: ticketInfo.data.businessName,
       totalValue: ticketInfo.data.value,
       wallet: wallet,
+      rate: ticketInfo.data.rate,
       timeExpired: ticketInfo.data.timeExpired,
     });
   }
