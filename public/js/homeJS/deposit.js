@@ -35,7 +35,7 @@ function countDownTime() {
     // If the count down is over, write some text
     if (distance < 0) {
       clearInterval(x);
-      payment.innerHTML = "EXPIRED!";
+      payment.innerHTML = "TICKET HAS EXPIRED !";
     }
   }, 1000);
 }

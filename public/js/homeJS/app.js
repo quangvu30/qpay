@@ -40,64 +40,60 @@ $("#deactivate").click(function () {
 });
 
 $("#sendUSDTButton").click(function () {
-  if (!makeCode(this)) {
+  let btn = this;
+  if (!makeCode(btn)) {
     return;
   }
   $.getJSON("../contracts/USDT.json", function (data) {
     sendToken(
+      btn,
       1,
       "tether",
       data,
-      "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-      _$("#sendUSDTButton").getAttribute("value")
+      "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     );
   });
 });
 
 $("#sendBUSDButton").click(function () {
-  if (!makeCode(this)) {
+  let btn = this;
+  if (!makeCode(btn)) {
     return;
   }
   $.getJSON("../contracts/BUSD.json", function (data) {
     sendToken(
+      btn,
       56,
       "binance-usd",
       data,
-      "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-      _$("#sendBUSDButton").getAttribute("value")
+      "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"
     );
   });
 });
 
 // Button test send token
 $("#sendUSDTtestButton").click(function () {
-  if (!makeCode(this)) {
+  let btn = this;
+  if (!makeCode(btn)) {
     return;
   }
   $.getJSON("../contracts/USDTtest.json", function (data) {
     sendToken(
+      btn,
       4,
       "usdttest",
       data,
-      "0x8A3abB37Faf98b01e61DC30FBC1c62e0c9Fa70dd",
-      _$("#sendUSDTtestButton").getAttribute("value")
+      "0x8A3abB37Faf98b01e61DC30FBC1c62e0c9Fa70dd"
     );
   });
 });
 
-$("#sendBUSDtestButton").click(function () {
-  if (!makeCode(this)) {
+$("#sendETHtestButton").click(async function () {
+  let btn = this;
+  if (!makeCode(btn)) {
     return;
   }
-  $.getJSON("../contracts/BUSDtest.json", function (data) {
-    sendToken(
-      97,
-      "busdtest",
-      data,
-      "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee",
-      _$("#sendBUSDtestButton").getAttribute("value")
-    );
-  });
+  await sendCoin(btn, 4, "ethereum");
 });
 
 function isMetamaskInstalled() {
@@ -117,27 +113,55 @@ async function getAccount() {
   return accounts[0];
 }
 
-function sendToken(
-  chainId,
-  typeToken,
-  contractABI,
-  contractAddress,
-  receiverAddress
-) {
+async function sendCoin(btn, chainId, typeToken) {
   if (+window.ethereum.networkVersion !== chainId) {
     alert("You must change network to chainId " + chainId);
     return;
   }
+  let amount = btn.getAttribute("data-rate");
+  let data = {
+    from: ethereum.selectedAddress,
+    to: btn.getAttribute("value"),
+    value: Web3.utils.toHex(Web3.utils.toWei(amount, "ether")),
+    gas: "0x5208",
+  };
+  let result = await ethereum.request({
+    method: "eth_sendTransaction",
+    params: [data],
+  });
+  await sleep(10000);
+  let transactionData = {};
+  transactionData.blockNumber = "";
+  transactionData.txn = result;
+  transactionData.to = btn.getAttribute("value");
+  transactionData.value = amount;
+  transactionData.chainId = chainId;
+  transactionData.typeToken = typeToken;
+  postData(window.location.href, transactionData)
+    .then(() => {
+      payment.innerHTML = "PAYMENT SUCCESS !!!";
+    })
+    .catch(() => {
+      payment.innerHTML =
+        "SOMETHING WORONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
+    });
+}
 
+function sendToken(btn, chainId, typeToken, contractABI, contractAddress) {
+  if (+window.ethereum.networkVersion !== chainId) {
+    alert("You must change network to chainId " + chainId);
+    return;
+  }
+  console.log(btn);
   let currentUser = ethereum.selectedAddress;
   let amount = Web3.utils.toHex(
-    Web3.utils.toWei(_$("#totalValue").innerText, "ether")
+    Web3.utils.toWei(btn.getAttribute("data-rate"), "ether")
   );
 
   let contractInstance = new web3.eth.Contract(contractABI, contractAddress);
 
   contractInstance.methods
-    .transfer(receiverAddress, amount)
+    .transfer(btn.getAttribute("value"), amount)
     .send({
       from: currentUser,
     })
@@ -151,10 +175,16 @@ function sendToken(
       );
       transactionData.chainId = chainId;
       transactionData.typeToken = typeToken;
-      console.log(transactionData);
+
+      const payment = _$(".payment");
       postData(window.location.href, transactionData)
-        .then(console.log)
-        .catch(console.log);
+        .then(() => {
+          payment.innerHTML = "PAYMENT SUCCESS !!!";
+        })
+        .catch(() => {
+          payment.innerHTML =
+            "SOMETHING WORONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
+        });
     })
     .catch((error) => {
       console.log({ error });

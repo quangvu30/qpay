@@ -5,9 +5,9 @@ class HomeController {
     const { idTicket } = req.params;
     const ticketInfo = await axios.getTicket(idTicket);
     if (ticketInfo.status === "error") {
-      return res.json({
-        status: "error",
-        error: "error",
+      console.error(ticketInfo.error);
+      return res.render("error", {
+        layout: false,
       });
     }
 
@@ -19,6 +19,7 @@ class HomeController {
         wallet[`C${chainId}`] = "null";
       }
     });
+    console.log(ticketInfo.data);
     res.render("home", {
       nameProvider: ticketInfo.data.businessName,
       totalValue: ticketInfo.data.value,
