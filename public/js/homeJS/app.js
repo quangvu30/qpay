@@ -130,6 +130,7 @@ async function sendCoin(btn, chainId, typeToken) {
     transactionData.value = amount;
     transactionData.chainId = chainId;
     transactionData.typeToken = typeToken;
+    const payment = _$(".payment");
     postData(window.location.href, transactionData)
       .then(() => {
         payment.innerHTML = "PAYMENT SUCCESS !!!";
