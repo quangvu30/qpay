@@ -19,7 +19,6 @@ class HomeController {
         wallet[`C${chainId}`] = "null";
       }
     });
-    console.log(ticketInfo.data);
     res.render("home", {
       nameProvider: ticketInfo.data.businessName,
       totalValue: ticketInfo.data.value,

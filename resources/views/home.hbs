@@ -97,28 +97,28 @@
           wallet</div>
         <div class="payment-btns">
           <div
-            id="sendBUSDButton"
+            id="sendBNBButton"
             class="btn-token btn-BUSD"
             value={{wallet.C56}}
             data-rate={{rate.binancecoin.usd}}
+          >
+            <div>
+              <img class="icon-btn" src="/img/bnb.png" />
+              BNB
+            </div>
+            <div>BSC</div>
+          </div>
+          <div
+            id="sendBUSDButton"
+            class="btn-token btn-USDT"
+            value={{wallet.C1}}
+            data-rate={{rate.tether.usd}}
           >
             <div>
               <img class="icon-btn" src="/img/iconBUSD.png" />
               BUSD
             </div>
             <div>BEP20</div>
-          </div>
-          <div
-            id="sendUSDTButton"
-            class="btn-token btn-USDT"
-            value={{wallet.C1}}
-            data-rate={{rate.tether.usd}}
-          >
-            <div>
-              <img class="icon-btn" src="/img/iconUSDT.png" />
-              USDT
-            </div>
-            <div>ERC20</div>
           </div>
         </div>
         <div class="payment-btns">
@@ -129,10 +129,10 @@
             data-rate={{rate.ethereum.usd}}
           >
             <div>
-              <img class="icon-btn" src="/img/iconBUSD.png" />
+              <img class="icon-btn" src="/img/ethereum.png" />
               ETH rinkeby
             </div>
-            <div>BEP20</div>
+            <div>Ethereum</div>
           </div>
           <div
             id="sendUSDTtestButton"

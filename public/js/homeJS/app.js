@@ -39,22 +39,6 @@ $("#deactivate").click(function () {
   address.innerHTML = "";
 });
 
-$("#sendUSDTButton").click(function () {
-  let btn = this;
-  if (!makeCode(btn)) {
-    return;
-  }
-  $.getJSON("../contracts/USDT.json", function (data) {
-    sendToken(
-      btn,
-      1,
-      "tether",
-      data,
-      "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-    );
-  });
-});
-
 $("#sendBUSDButton").click(function () {
   let btn = this;
   if (!makeCode(btn)) {
@@ -66,9 +50,17 @@ $("#sendBUSDButton").click(function () {
       56,
       "binance-usd",
       data,
-      "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"
+      "0x4Fabb145d64652a948d72533023f6E7A623C7C53"
     );
   });
+});
+
+$("#sendBNBButton").click(async function () {
+  let btn = this;
+  if (!makeCode(btn)) {
+    return;
+  }
+  await sendCoin(btn, 56, "binancecoin");
 });
 
 // Button test send token
@@ -118,33 +110,37 @@ async function sendCoin(btn, chainId, typeToken) {
     alert("You must change network to chainId " + chainId);
     return;
   }
-  let amount = btn.getAttribute("data-rate");
-  let data = {
-    from: ethereum.selectedAddress,
-    to: btn.getAttribute("value"),
-    value: Web3.utils.toHex(Web3.utils.toWei(amount, "ether")),
-    gas: "0x5208",
-  };
-  let result = await ethereum.request({
-    method: "eth_sendTransaction",
-    params: [data],
-  });
-  await sleep(10000);
-  let transactionData = {};
-  transactionData.blockNumber = "";
-  transactionData.txn = result;
-  transactionData.to = btn.getAttribute("value");
-  transactionData.value = amount;
-  transactionData.chainId = chainId;
-  transactionData.typeToken = typeToken;
-  postData(window.location.href, transactionData)
-    .then(() => {
-      payment.innerHTML = "PAYMENT SUCCESS !!!";
-    })
-    .catch(() => {
-      payment.innerHTML =
-        "SOMETHING WORONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
+  try {
+    let amount = btn.getAttribute("data-rate");
+    let data = {
+      from: ethereum.selectedAddress,
+      to: btn.getAttribute("value"),
+      value: Web3.utils.toHex(Web3.utils.toWei(amount, "ether")),
+      gas: "0x5208",
+    };
+    let result = await ethereum.request({
+      method: "eth_sendTransaction",
+      params: [data],
     });
+    await sleep(10000);
+    let transactionData = {};
+    transactionData.blockNumber = "";
+    transactionData.txn = result;
+    transactionData.to = btn.getAttribute("value");
+    transactionData.value = amount;
+    transactionData.chainId = chainId;
+    transactionData.typeToken = typeToken;
+    postData(window.location.href, transactionData)
+      .then(() => {
+        payment.innerHTML = "PAYMENT SUCCESS !!!";
+      })
+      .catch(() => {
+        payment.innerHTML =
+          "SOMETHING WORONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
+      });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function sendToken(btn, chainId, typeToken, contractABI, contractAddress) {
@@ -152,7 +148,6 @@ function sendToken(btn, chainId, typeToken, contractABI, contractAddress) {
     alert("You must change network to chainId " + chainId);
     return;
   }
-  console.log(btn);
   let currentUser = ethereum.selectedAddress;
   let amount = Web3.utils.toHex(
     Web3.utils.toWei(btn.getAttribute("data-rate"), "ether")
