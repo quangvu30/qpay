@@ -133,12 +133,14 @@ async function sendCoin(btn, chainId, typeToken) {
     transactionData.typeToken = typeToken;
     const payment = _$(".payment");
     postData(window.location.href, transactionData)
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         payment.innerHTML = "PAYMENT SUCCESS !!!";
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         payment.innerHTML =
-          "SOMETHING WORONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
+          "SOMETHING WRONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
       });
   } catch (error) {
     console.error(error);
@@ -176,10 +178,12 @@ function sendToken(btn, chainId, typeToken, contractABI, contractAddress) {
 
       const payment = _$(".payment");
       postData(window.location.href, transactionData)
-        .then(() => {
+        .then((res) => {
+          console.log(res);
           payment.innerHTML = "PAYMENT SUCCESS !!!";
         })
-        .catch(() => {
+        .catch((err) => {
+          console.error(err);
           payment.innerHTML =
             "SOMETHING WRONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
         });
