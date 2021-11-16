@@ -31,7 +31,8 @@ class HomeController {
   // [POST]  validate transaction
   async validateTxn(req, res) {
     const { idTicket } = req.params;
-    await axios.validTransaction(idTicket, req.body);
+    const respone = await axios.validTransaction(idTicket, req.body);
+    return res.json(respone);
   }
 }
 

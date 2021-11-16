@@ -138,7 +138,7 @@ async function sendCoin(btn, chainId, typeToken) {
         payment.innerHTML = "PAYMENT SUCCESS !!!";
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
         payment.innerHTML =
           "SOMETHING WRONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
       });
@@ -181,17 +181,19 @@ function sendToken(btn, chainId, typeToken, contractABI, contractAddress) {
         .then((res) => {
           console.log(res);
           payment.innerHTML = "PAYMENT SUCCESS !!!";
+          spinner.hide();
         })
         .catch((err) => {
-          console.error(err);
+          console.log(err);
           payment.innerHTML =
             "SOMETHING WRONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
+          spinner.hide();
         });
     })
     .catch((error) => {
       console.log({ error });
+      spinner.hide();
     });
-  spinner.hide();
 }
 
 async function postData(url, data) {
