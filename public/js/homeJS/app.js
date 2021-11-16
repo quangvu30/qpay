@@ -122,7 +122,8 @@ async function sendCoin(btn, chainId, typeToken) {
       method: "eth_sendTransaction",
       params: [data],
     });
-    await sleep(10000);
+    spinner.show();
+    await sleep(15000);
     let transactionData = {};
     transactionData.blockNumber = "";
     transactionData.txn = result;
@@ -142,6 +143,7 @@ async function sendCoin(btn, chainId, typeToken) {
   } catch (error) {
     console.error(error);
   }
+  spinner.hide();
 }
 
 function sendToken(btn, chainId, typeToken, contractABI, contractAddress) {
@@ -155,7 +157,7 @@ function sendToken(btn, chainId, typeToken, contractABI, contractAddress) {
   );
 
   let contractInstance = new web3.eth.Contract(contractABI, contractAddress);
-
+  spinner.show();
   contractInstance.methods
     .transfer(btn.getAttribute("value"), amount)
     .send({
@@ -179,12 +181,13 @@ function sendToken(btn, chainId, typeToken, contractABI, contractAddress) {
         })
         .catch(() => {
           payment.innerHTML =
-            "SOMETHING WORONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
+            "SOMETHING WRONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
         });
     })
     .catch((error) => {
       console.log({ error });
     });
+  spinner.hide();
 }
 
 async function postData(url, data) {

@@ -83,6 +83,7 @@
 }
 .payment {
   padding: 20px;
+  color: white;
 }
 .payment-title {
   color: var(--white);
