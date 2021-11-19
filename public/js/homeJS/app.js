@@ -110,40 +110,36 @@ async function sendCoin(btn, chainId, typeToken) {
     alert("You must change network to chainId " + chainId);
     return;
   }
+  const payment = _$(".payment");
+  let amount = btn.getAttribute("data-rate");
+  let data = {
+    from: ethereum.selectedAddress,
+    to: btn.getAttribute("value"),
+    value: Web3.utils.toWei(amount, "ether"),
+    gas: "0x5208",
+  };
+  spinner.show();
+  let result;
   try {
-    let amount = btn.getAttribute("data-rate");
-    let data = {
-      from: ethereum.selectedAddress,
-      to: btn.getAttribute("value"),
-      value: Web3.utils.toHex(Web3.utils.toWei(amount, "ether")),
-      gas: "0x5208",
-    };
-    let result = await ethereum.request({
-      method: "eth_sendTransaction",
-      params: [data],
-    });
-    spinner.show();
-    await sleep(15000);
-    let transactionData = {};
-    transactionData.blockNumber = "";
-    transactionData.txn = result;
-    transactionData.to = btn.getAttribute("value");
-    transactionData.value = amount;
-    transactionData.chainId = chainId;
-    transactionData.typeToken = typeToken;
-    const payment = _$(".payment");
-    postData(window.location.href, transactionData)
-      .then((res) => {
-        console.log(res);
-        payment.innerHTML = "PAYMENT SUCCESS !!!";
-      })
-      .catch((err) => {
-        console.log(err);
-        payment.innerHTML =
-          "SOMETHING WRONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
-      });
+    result = await web3.eth.sendTransaction(data);
   } catch (error) {
-    console.error(error);
+    //payment.innerHTML = "Transaction failed. Please try again !!!";
+    spinner.hide();
+    return;
+  }
+
+  let transactionData = {};
+  transactionData.blockNumber = "";
+  transactionData.txn = result.transactionHash;
+  transactionData.to = btn.getAttribute("value");
+  transactionData.value = amount;
+  transactionData.chainId = chainId;
+  transactionData.typeToken = typeToken;
+  try {
+    await postData(window.location.href, transactionData);
+    payment.innerHTML = "PAYMENT SUCCESS !!!";
+  } catch {
+    payment.innerHTML = "SOMETHING WRONG. PLEASE CONTACT TO YOUR PROVIDER !!!";
   }
   spinner.hide();
 }
